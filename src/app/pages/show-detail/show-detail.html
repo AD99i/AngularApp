@@ -1,0 +1,82 @@
+<div class="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+  <!-- Loader -->
+  @if (loading()) {
+    <div class="animate-pulse space-y-4">
+      <div class="h-64 bg-gray-300 rounded"></div>
+      <div class="h-6 bg-gray-300 rounded w-1/2"></div>
+      <div class="h-4 bg-gray-200 rounded w-1/3"></div>
+      <div class="h-4 bg-gray-200 rounded w-2/3"></div>
+    </div>
+  }
+
+  <!-- Show details -->
+  @if (!loading() && show()) {
+    <div class="bg-white rounded-lg shadow overflow-hidden">
+      <!-- Image -->
+      @if (show()?.image?.original) {
+        <img [src]="show()?.image?.original" [alt]="show()?.name" class="w-full object-cover max-h-[500px]" />
+      }
+
+      <!-- Contenu -->
+      <div class="p-6 space-y-4">
+        <h1 class="text-3xl font-bold text-gray-800">{{ show()?.name }}</h1>
+
+        <!-- Genres -->
+        @if ((show()?.genres?.length ?? 0) > 0) {
+          <p class="text-sm text-gray-600">
+            Genres : <span class="font-medium">{{ show()?.genres?.join(', ') }}</span>
+          </p>
+        }
+
+        <!-- Rating -->
+        @if (show()?.rating?.average) {
+          <p class="text-sm text-yellow-600 font-semibold">
+            ⭐ {{ show()?.rating?.average }}/10
+          </p>
+        }
+
+        <!-- Status, Langue, Runtime -->
+        <p class="text-sm text-gray-700">
+          {{ show()?.status }} • {{ show()?.language }}
+          @if (show()?.averageRuntime) {
+            • {{ show()?.averageRuntime }} min
+          }
+        </p>
+
+        <!-- Schedule -->
+        @if ((show()?.schedule?.days?.length ?? 0) > 0) {
+          <p class="text-sm text-gray-500">
+            📅 {{ show()?.schedule?.days?.join(', ') || '' }}
+            @if (show()?.schedule?.time) { à {{ show()?.schedule?.time }} }
+          </p>
+        }
+
+        <!-- Dates -->
+        <p class="text-xs text-gray-400">
+          Première diffusion : {{ show()?.premiered }}
+          @if (show()?.ended) {
+            – Fin : {{ show()?.ended }}
+          }
+        </p>
+
+        <!-- Résumé -->
+        <div class="prose max-w-none text-gray-700" [innerHTML]="show()?.summary"></div>
+
+        <!-- Lien officiel -->
+        @if (show()?.officialSite) {
+          <a [href]="show()?.officialSite" target="_blank"
+             class="inline-block mt-4 text-red-600 hover:underline">
+            🔗 Site officiel
+          </a>
+        }
+
+        <!-- Retour -->
+        <div class="mt-6">
+          <a routerLink="/shows" class="text-sm text-gray-600 hover:text-red-600">
+            ← Retour aux shows
+          </a>
+        </div>
+      </div>
+    </div>
+  }
+</div>

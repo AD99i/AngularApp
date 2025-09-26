@@ -1,0 +1,42 @@
+<div class="flex h-screen bg-gray-100">
+  <!-- Sidebar gauche : Historique -->
+  <aside class="w-64 bg-white shadow-md hidden md:block">
+    <div class="p-4 border-b">
+      <h2 class="text-lg font-semibold text-gray-700">Historique</h2>
+    </div>
+    <ul class="p-4 space-y-2 text-gray-600">
+      <!-- Exemple d’éléments d’historique -->
+      <li class="hover:text-red-600 cursor-pointer">Angular tutorial</li>
+      <li class="hover:text-red-600 cursor-pointer">Spring Boot REST API</li>
+      <li class="hover:text-red-600 cursor-pointer">Tailwind CSS UI</li>
+      <li class="hover:text-red-600 cursor-pointer">Java JEE Hibernate</li>
+    </ul>
+  </aside>
+
+  <!-- Contenu principal -->
+  <main class="flex-1 p-6 overflow-y-auto">
+    <h1 class="text-2xl font-semibold mb-6">Vidéos recommandées</h1>
+
+    <!-- Grid de vidéos -->
+    <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+      <!-- Exemple de carte vidéo -->
+      <div class="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+        <div class="aspect-w-16 aspect-h-9 bg-gray-300"></div>
+        <div class="p-4">
+          <h2 class="font-semibold text-gray-800 truncate">Titre de la vidéo</h2>
+          <p class="text-sm text-gray-500">Chaîne • 1,2k vues</p>
+        </div>
+      </div>
+
+      <div class="bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden">
+        <div class="aspect-w-16 aspect-h-9 bg-gray-300"></div>
+        <div class="p-4">
+          <h2 class="font-semibold text-gray-800 truncate">Une autre vidéo</h2>
+          <p class="text-sm text-gray-500">Chaîne • 3,4k vues</p>
+        </div>
+      </div>
+
+      <!-- Tu pourras générer dynamiquement avec *ngFor -->
+    </div>
+  </main>
+</div>

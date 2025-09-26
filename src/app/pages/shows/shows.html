@@ -1,0 +1,46 @@
+<div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-6">
+  <h1 class="text-2xl font-semibold mb-6">Tous les Shows</h1>
+
+  <!-- Liste des shows -->
+  <div class="grid gap-6 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4">
+    @for (show of shows(); track show.id) {
+      <!-- Carte cliquable -->
+      <a [routerLink]="['/shows', show.id]"
+         class="block h-full bg-white rounded-lg shadow hover:shadow-lg transition overflow-hidden flex flex-col cursor-pointer">
+
+        <!-- Image -->
+        <div class="aspect-w-16 aspect-h-9 bg-gray-200">
+          @if (show.image?.medium) {
+            <img [src]="show.image.medium" [alt]="show.name" class="w-full h-full object-cover" />
+          }
+        </div>
+
+        <!-- Contenu -->
+        <div class="p-4 flex-1 flex flex-col">
+          <h2 class="font-semibold text-gray-800 truncate">{{ show.name }}</h2>
+
+          <p class="text-xs text-gray-500 mb-1">{{ show.genres.join(', ') }}</p>
+
+          @if (show.rating?.average) {
+            <p class="text-sm text-yellow-600 font-medium">⭐ {{ show.rating.average }}/10</p>
+          }
+
+          <p class="text-sm text-gray-600">{{ show.status }} • {{ show.language }}</p>
+
+          @if (show.schedule?.days?.length) {
+            <p class="text-xs text-gray-500">
+              📅 {{ show.schedule.days.join(', ') }} à {{ show.schedule.time }}
+            </p>
+          }
+
+          <p class="text-xs text-gray-400 mt-1">
+            Diffusé depuis : {{ show.premiered }}
+            @if (show.ended) { – Fin : {{ show.ended }} }
+          </p>
+
+          <div class="mt-2 text-sm text-gray-700 line-clamp-3" [innerHTML]="show.summary"></div>
+        </div>
+      </a>
+    }
+  </div>
+</div>
